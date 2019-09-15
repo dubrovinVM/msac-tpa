@@ -1,0 +1,58 @@
+﻿@model msac_tpa.DAL.Entities.Sportman
+
+@{
+    ViewData["Title"] = @Resources.Actions.Create;
+}
+
+<h1 class="top_20">@Resources.Actions.AddSportsman</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-antiforgery="true" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Surname" class="control-label"></label>
+                <input asp-for="Surname" class="form-control" />
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BirthDay" class="control-label"></label>
+                <input asp-for="BirthDay" class="form-control" />
+                <span asp-validation-for="BirthDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegionId" class="control-label"></label>
+                <select asp-for="RegionId" class="form-control" asp-items="@ViewBag.Regions">
+                    <option selected="selected" class="form-control" value="">-- @Resources.Spans.ChooseValue--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="AvatarFilePath" class="control-label"></label>
+                <input type="file" name="avatar" id="avatar" /><br>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <input type="submit" value="@Resources.Actions.Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Resources.Spans.BackToList</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

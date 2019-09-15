@@ -1,0 +1,49 @@
+﻿@model msac_tpa.DAL.Entities.Comission
+
+@{
+    ViewData["Title"] = @Resources.Actions.AddComission;
+}
+
+<h1 class="top_20">@Resources.Actions.AddComission</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegionId" class="control-label"></label>
+                <select asp-for="RegionId" class="form-control" asp-items="@ViewBag.Regions">
+                    <option selected="selected" class="form-control" value="">-- @Resources.Spans.ChooseValue--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SportmanComissions" class="control-label"></label>
+                    @{
+                        for (int i = 0; i < 5; i++)
+                        {
+                            <div class="form-group">
+                                <select name="sportman" class="form-control" asp-items="ViewBag.Sportmen"></select>
+                            </div>
+                        }
+                    }
+            </div>
+                <div class="form-group">
+                    <input type="submit" value="@Resources.Actions.Create" class="btn btn-primary" />
+                </div>
+</form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Resources.Spans.BackToList</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<msac_tpa.DAL.Entities.Comission>
+
+@{
+    ViewData["Title"] = @Resources.Title.Comission;
+}
+
+<h1>@Resources.Title.Comission</h1>
+<hr />
+<form method="get">
+    <div class="form-inline form-group">
+        <label class="control-label right_20">@Resources.Models.Title: </label>
+        @Html.TextBox("title", "", new { @class = "form-control right_20" })
+        <label class="control-label right_20">@Resources.Models.Region: </label>
+        @Html.DropDownList("region", @ViewBag.Regions as SelectList, new { @class = "form-control right_20" })
+        <input type="submit" value="@Resources.Actions.Filter" class="btn btn-primary" />
+    </div>
+</form>
+<p>
+    <a asp-action="Create">@Resources.Actions.Create</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Resources.Models.Title</th>
+            <th>@Resources.Models.Region</th>
+            <th>@Resources.Models.MembersOfComission</th>
+            <th></th>
+        </tr>
+       
+    </thead>
+    <tbody>
+    @foreach (var item in @Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Region.Name</td>
+            <td>
+                <ul>
+                    @foreach (var member in item.SportmanComissions)
+                    {
+                    <li>
+                        @{ var source = !string.IsNullOrEmpty(member.Sportman.AvatarFilePath) ? $"/images/sportmen/{member.Sportman.AvatarFilePath}" : "/images/noPhoto.jpg";}
+                        <img src="@source" style="height: 70px; width: 70px;" />
+                        @member.Sportman.Surname @member.Sportman.Name @member.Sportman.LastName
+                    </li>
+                    }
+                </ul>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">@Resources.Actions.Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">@Resources.Actions.Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">@Resources.Actions.Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+

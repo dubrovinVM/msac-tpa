@@ -1,0 +1,37 @@
+﻿@model msac_tpa.DAL.Entities.Comission
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Resources.Title.Comission - @Resources.Actions.Details - <span style="color: blue;"><em>@Model.Name</em></span></h1>
+<hr />
+
+<div class="row">
+    <div class="col-sm-2">
+        @Html.LabelFor(model => model.Region, new { @class = "control-label" })
+    </div>
+    <div class="col-sm-10">
+        @Html.Label("", @Model.Region.Name, new { @class = "control-label" })
+    </div>
+    <div class="col-sm-2">
+        <label asp-for="SportmanComissions" class="control-label"></label>
+    </div>
+    <div class="col-sm-10 sportmenlist">
+        <ul>
+            @foreach (var member in ViewBag.ComissionMembers)
+            {
+                <li>
+                    @{ var source = !string.IsNullOrEmpty(member.AvatarFilePath) ? $"/images/sportmen/{member.AvatarFilePath}" : "/images/noPhoto.jpg";}
+                    <img src="@source" />
+                    @member.Surname @member.Name @member.LastName (@member.Region.Name)
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+<hr />
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">@Resources.Actions.Edit</a> |
+    <a asp-action="Index">@Resources.Spans.BackToList</a>
+</div>

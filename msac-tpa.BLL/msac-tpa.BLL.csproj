@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>msac_tpa.BLL</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="BusinessModels\" />
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+
+</Project>

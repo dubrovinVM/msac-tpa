@@ -54,3 +54,32 @@ body {
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.top_20 {
+    margin-top: 20px !important;
+}
+.top_40 {
+    margin-top: 40px !important;
+}
+.right_20 {
+    margin-right: 20px !important;
+}
+
+.sportmenlist {
+}
+
+    .sportmenlist ul {
+        list-style-type: none;
+        margin: 0;
+    }
+
+        .sportmenlist ul li {
+            border-bottom: 1px solid #ccc;
+            margin-top: 15px;
+        }
+
+            .sportmenlist ul li img {
+                height: 70px !important;
+                width: 70px !important;
+                margin-right: 20px !important;
+            }

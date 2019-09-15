@@ -1,0 +1,56 @@
+﻿@model msac_tpa.DAL.Entities.Sportman
+
+@{
+    ViewData["Title"] = @Resources.Actions.Delete;
+}
+
+<h1>@Resources.Actions.Delete</h1>
+
+<h3>@Resources.Spans.AreYouSureToDel</h3>
+<div>
+    <h4>@Resources.Title.Sportsman</h4>
+    <hr />
+    <div>
+        @{ var source = !string.IsNullOrEmpty(Model.AvatarFilePath) ? $"/images/sportmen/{Model.AvatarFilePath}" : "/images/noPhoto.jpg";}
+        <img src="@source" style="height: 70px;width: 70px" />
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Region)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Region.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BirthDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BirthDay)
+        </dd>
+    </dl>
+    <hr />
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="@Resources.Actions.Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">@Resources.Spans.BackToList</a>
+    </form>
+</div>

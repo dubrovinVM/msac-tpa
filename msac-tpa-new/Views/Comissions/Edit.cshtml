@@ -1,0 +1,49 @@
+﻿@model msac_tpa.DAL.Entities.Comission
+
+@{
+    ViewData["Title"] = @Resources.Actions.Edit;
+}
+
+<h1>@Resources.Actions.Edit - @Resources.Title.Comission</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegionId" class="control-label"></label>
+                <select asp-for="RegionId" class="form-control" asp-items="@ViewBag.Regions"></select>
+                <span asp-validation-for="RegionId" class="text-danger"></span>
+            </div>
+            <label asp-for="SportmanComissions" class="control-label"></label>
+            @{
+                foreach (var sportman in @ViewBag.ComissionMembers)
+                {
+                    <div class="form-group">
+                        <select name="sportman" class="form-control" asp-items="ViewBag.Sportmen">
+                            <option selected="selected" class="form-control" value="@sportman.Id">@sportman.Fullname</option>
+                        </select>
+                    </div>
+                }
+            }
+            
+            <div class="form-group">
+                <input type="submit" value="@Resources.Actions.Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Resources.Spans.BackToList</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
