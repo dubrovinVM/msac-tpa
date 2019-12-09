@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using msac_tpa_new.Entities;
 
-namespace msac_tpa.DAL.Entities
+namespace msac_tpa_new.Entities
 {
     public class Sportman
     {

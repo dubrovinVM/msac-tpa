@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Результат атестації.
+        /// </summary>
+        public static string AttestationResult {
+            get {
+                return ResourceManager.GetString("AttestationResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Назад до списку.
         /// </summary>
         public static string BackToList {
@@ -93,6 +102,132 @@ namespace Resources {
         public static string ChooseValue {
             get {
                 return ResourceManager.GetString("ChooseValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дата з:.
+        /// </summary>
+        public static string DateFrom {
+            get {
+                return ResourceManager.GetString("DateFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Дата по:.
+        /// </summary>
+        public static string DateTo {
+            get {
+                return ResourceManager.GetString("DateTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Видалено успішно!.
+        /// </summary>
+        public static string DeletedSuccess {
+            get {
+                return ResourceManager.GetString("DeletedSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введіть емейл.
+        /// </summary>
+        public static string EnterEmail {
+            get {
+                return ResourceManager.GetString("EnterEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введіть пароль.
+        /// </summary>
+        public static string EnterPassword {
+            get {
+                return ResourceManager.GetString("EnterPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сталася помилка!.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Новий пароль.
+        /// </summary>
+        public static string NewPassport {
+            get {
+                return ResourceManager.GetString("NewPassport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Значення не існує в базі!.
+        /// </summary>
+        public static string NoExists {
+            get {
+                return ResourceManager.GetString("NoExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Файл не завантажений.
+        /// </summary>
+        public static string NoFile {
+            get {
+                return ResourceManager.GetString("NoFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вибрано не всі параметри!.
+        /// </summary>
+        public static string NotAllParams {
+            get {
+                return ResourceManager.GetString("NotAllParams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Кількість записів на сторінці.
+        /// </summary>
+        public static string PageSize {
+            get {
+                return ResourceManager.GetString("PageSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Повторіть пароль.
+        /// </summary>
+        public static string ReenterPassword {
+            get {
+                return ResourceManager.GetString("ReenterPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Такий результат уже існує! Повторно не може бути занесений!.
+        /// </summary>
+        public static string ResultExists {
+            get {
+                return ResourceManager.GetString("ResultExists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Спортсмен доданий успішно!.
+        /// </summary>
+        public static string SportmanAddedSuccess {
+            get {
+                return ResourceManager.GetString("SportmanAddedSuccess", resourceCulture);
             }
         }
     }

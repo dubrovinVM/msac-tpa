@@ -34,7 +34,14 @@ namespace msac_tpa_new.BusinessLogic
             {
                 lock (_lock)
                 {
-                    File.AppendAllText(filePath, formatter(state, exception) + Environment.NewLine);
+                    try
+                    {
+                        File.AppendAllText(filePath, formatter(state, exception) + Environment.NewLine);
+                    }
+                    catch (Exception)
+                    {
+                        // ignored
+                    }
                 }
             }
         }

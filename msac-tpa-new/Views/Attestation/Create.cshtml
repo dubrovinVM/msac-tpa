@@ -1,0 +1,57 @@
+﻿@model msac_tpa_new.Entities.Attestation
+
+@{
+    ViewData["Title"] = @Resources.Title.Attestation;
+}
+
+<h1 class="title">@Resources.Actions.AddAttestation</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" asp-antiforgery="true" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RegionId" class="control-label"></label>
+                <select asp-for="RegionId" class="form-control" asp-items="@ViewBag.Regions">
+                    <option selected="selected" class="form-control" value="">-- @Resources.Spans.ChooseValue--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IssueDate" class="control-label"></label>
+                <input asp-for="IssueDate" class="form-control" />
+                <span asp-validation-for="IssueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ComissionId" class="control-label"></label>
+                <select asp-for="ComissionId" class="form-control" asp-items="ViewBag.Comissions">
+                    <option selected="selected" class="form-control" value="">-- @Resources.Spans.ChooseValue--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderFilePath" class="control-label"></label>
+                <input type="file" name="OrderFilePath" id="OrderFilePath" /><br>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescisionFilePath" class="control-label"></label>
+                <input type="file" name="DescisionFilePath" id="DescisionFilePath"/><br>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Resources.Actions.Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Resources.Spans.BackToList</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,37 @@
+﻿@using msac_tpa_new.Entities
+@using msac_tpa_new.App_Code
+@model List<AttestationUserBelt>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Resources.Title.Sportsman</th>
+            <th>@Resources.Title.Belt</th>
+            <th>@Resources.Actions.Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model)
+        {
+            <tr>
+                <td style="float: left;">
+                    @{ var source2 = !string.IsNullOrEmpty(item.Sportman.AvatarFilePath) ? $"/images/sportmen/{item.Sportman.AvatarFilePath}" : "/images/noPhoto.jpg";}
+                    <img style="width: 50px; margin-left: 15px;" src="@source2" />
+                    @item.Sportman.Surname @item.Sportman.Name @item.Sportman.LastName
+                </td>
+                <td>@item.Belt.Name</td>
+                <td>
+                    <form asp-action="DeleteSportmanAttestation"  data-ajax="true" data-ajax-update="#attestationResult"
+                          asp-route-id="@item.Id"
+                          asp-route-sportmanId="@item.SportmanId"
+                          asp-route-beltId="@item.BeltId"
+                          asp-route-attestationId="@item.AttestationId">
+                        <button type="submit" class="btn btn-sm btn-danger d-none d-md-inline-block">
+                           @Resources.Actions.Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

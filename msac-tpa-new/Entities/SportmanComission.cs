@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using msac_tpa.DAL.Entities;
 
 namespace msac_tpa_new.Entities
 {

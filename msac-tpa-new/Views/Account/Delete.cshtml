@@ -1,0 +1,48 @@
+﻿@model msac_tpa_new.Entities.Authentication.User
+
+@{
+    ViewData["Title"] = @Resources.Actions.Delete;
+}
+<h1 class="title">@Resources.Actions.Delete</h1>
+
+<h3>@Resources.Spans.AreYouSureToDel</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RoleId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RoleId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RegionId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RegionId)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" value="@Resources.Actions.Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">@Resources.Spans.BackToList</a>
+    </form>
+</div>

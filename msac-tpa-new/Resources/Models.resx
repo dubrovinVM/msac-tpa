@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Address" xml:space="preserve">
+    <value>Місце проведення</value>
+  </data>
+  <data name="Admin" xml:space="preserve">
+    <value>Налаштування</value>
+  </data>
+  <data name="Attestations" xml:space="preserve">
+    <value>Атестації</value>
+  </data>
   <data name="AvatarFilePath" xml:space="preserve">
     <value>Фото</value>
+  </data>
+  <data name="Belt" xml:space="preserve">
+    <value>Пояс</value>
   </data>
   <data name="Birthday" xml:space="preserve">
     <value>Дата народження</value>
@@ -126,8 +138,20 @@
   <data name="Comission" xml:space="preserve">
     <value>Атестаційна Комісія</value>
   </data>
+  <data name="DescisionFilePath" xml:space="preserve">
+    <value>Рішення Атестаційної комісії</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Емейл</value>
+  </data>
+  <data name="IssueDate" xml:space="preserve">
+    <value>Дата проведення</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>По-батькові</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Логін</value>
   </data>
   <data name="MembersOfComission" xml:space="preserve">
     <value>Члени комісії</value>
@@ -135,8 +159,20 @@
   <data name="Name" xml:space="preserve">
     <value>Ім'я</value>
   </data>
+  <data name="OrderFilePath" xml:space="preserve">
+    <value>Наказ про присвоєння поясів</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
   <data name="Region" xml:space="preserve">
     <value>Регіон</value>
+  </data>
+  <data name="RegionOrg" xml:space="preserve">
+    <value>Відокремлений підрозділ</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Роль</value>
   </data>
   <data name="Surname" xml:space="preserve">
     <value>Прізвище</value>

@@ -1,10 +1,10 @@
-﻿@model msac_tpa.DAL.Entities.Sportman
+﻿@model msac_tpa_new.Entities.Sportman
 
 @{
     ViewData["Title"] = @Resources.Actions.Edit;
 }
 
-<h1>@Resources.Actions.Edit</h1>
+<h1 class="title">@Resources.Actions.Edit</h1>
 
 <h4 class="top_20">@Resources.Title.Sportsman</h4>
 <hr />
@@ -16,42 +16,42 @@
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Surname" class="control-label"></label>
-                <input asp-for="Surname" class="form-control" />
-                <span asp-validation-for="Surname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BirthDay" class="control-label"></label>
-                <input asp-for="BirthDay" class="form-control" />
-                <span asp-validation-for="BirthDay" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RegionId" class="control-label"></label>
-                <select asp-for="RegionId" class="form-control" asp-items="@ViewBag.Regions">
-                    @* <option selected="selected" class="form-control" value="@Model.RegionId">@Model.Region.Name</option>*@
-                </select>
-                <span asp-validation-for="RegionId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AvatarFilePath" class="control-label"></label>
-                <input type="file" name="avatar" id="avatar" /><br>
-                <input type="hidden" asp-for="AvatarFilePath" />
-            </div>
-            <div class="form-group">
-                <input type="submit" value="@Resources.Actions.Save" class="btn btn-primary" />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Surname" class="control-label"></label>
+                    <input asp-for="Surname" class="form-control" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BirthDay" class="control-label"></label>
+                    <input asp-for="BirthDay" class="form-control" />
+                    <span asp-validation-for="BirthDay" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RegionId" class="control-label"></label>
+                    <select asp-for="RegionId" class="form-control" asp-items="@ViewBag.Regions"></select>
+                    <span asp-validation-for="RegionId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AvatarFilePath" class="control-label"></label>
+                    <input type="file" name="avatar" id="avatar" /><br>
+                    <input type="hidden" asp-for="AvatarFilePath" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="@Resources.Actions.Save" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>

@@ -1,0 +1,107 @@
+﻿@using msac_tpa_new.ViewModels
+@model msac_tpa_new.ViewModels.AttestationsViewModel
+@{
+    ViewData["Title"] = @Resources.Title.Attestation;
+}
+
+<h1>@Resources.Title.Attestations</h1>
+
+<p>
+@if (User.IsInRole("admin"))
+{
+    <a asp-action="Create">@Resources.Actions.AddAttestation</a>
+}
+</p>
+<form method="get">
+    <div class="form-inline form-group">
+        <label class="control-label right_20">@Resources.Spans.DateFrom</label>
+        @Html.TextBox("dateFrom", "", new { @class = "form-control right_20 date date datepickerFrom" })
+
+        <label class="control-label right_20">@Resources.Spans.DateTo</label>
+        @Html.TextBox("dateTo", "", new { @class = "form-control right_20 date datepickerTo" })
+
+        <label class="control-label right_20">@Resources.Models.Region: </label>
+        @Html.DropDownList("region", @ViewBag.Regions as SelectList, new { @class = "form-control right_20" })
+        <input type="submit" value="@Resources.Actions.Filter" class="btn btn-primary" />
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => Model.Attestations.FirstOrDefault().Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.Attestations.FirstOrDefault().Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.Attestations.FirstOrDefault().IssueDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.Attestations.FirstOrDefault().OrderFilePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.Attestations.FirstOrDefault().DescisionFilePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.Attestations.FirstOrDefault().Comission)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in @Model.Attestations)
+        {
+            <tr>
+                <td>
+                    @item.Region.Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IssueDate)
+                </td>
+                <td>
+                    @{
+                        var source = !string.IsNullOrEmpty(item.OrderFilePath) ? $"/files/Order/{item.OrderFilePath}" : "";
+                        var linkName = !string.IsNullOrEmpty(item.OrderFilePath) ? @item.OrderFilePath : @Resources.Spans.NoFile;
+                    }
+                    <a target="_blank" href="@source">@linkName</a>
+                </td>
+                <td>
+                    @{
+                        source = !string.IsNullOrEmpty(item.DescisionFilePath) ? $"/files/Descision/{item.DescisionFilePath}" : "";
+                        linkName = !string.IsNullOrEmpty(item.DescisionFilePath) ? @item.DescisionFilePath : @Resources.Spans.NoFile;
+                    }
+                    <a target="_blank" href="@source">@linkName</a>
+                </td>
+                <td>
+                    @Html.ActionLink(item.Comission.Name, "Index", "Comissions", new { id = item.ComissionId, @target = "_blank" }, null)
+                </td>
+                <td>
+                    <a target="_blank" asp-action="Details" asp-route-id="@item.Id">@Resources.Actions.Details</a> |
+                    @if (User.IsInRole("admin"))
+                    {
+                        <a target="_blank" asp-action="Edit" asp-route-id="@item.Id">@Resources.Actions.Edit</a> @:| 
+                        <a target="_blank" asp-action="Delete" asp-route-id="@item.Id">@Resources.Actions.Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<page-link page-model="Model.PageViewModel" page-action="Index"></page-link>
+@section Scripts {
+    <script type="text/javascript">
+        $(".datepickerFrom").datetimepicker({
+            format: "dd MM yyyy",
+            startDate: '-60d',
+            language: 'ru'
+        });
+        $(".datepickerTo").datetimepicker({
+            format: "dd MM yyyy",
+            language: 'ru'
+        });
+    </script>
+}

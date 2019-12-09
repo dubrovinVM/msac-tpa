@@ -1,0 +1,89 @@
+﻿@model msac_tpa_new.Entities.Attestation
+
+@{
+    ViewData["Title"] = $" {@Resources.Actions.Details} | {@Resources.Title.Attestation} | {@Model.Region.Name}";
+}
+
+<h1 class="title">@Resources.Title.Attestation - @Resources.Actions.Details - <span style="color: blue;"><em>@Model.Region.Name</em></span></h1>
+<hr />
+<div class="row">
+    <div class="col-sm-4">
+        <label class="control-label"> @Html.DisplayNameFor(model => model.IssueDate)</label>
+    </div>
+    <div class="col-sm-8">
+        @Html.DisplayFor(model => model.IssueDate)
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <label class="control-label">@Html.DisplayNameFor(model => model.OrderFilePath)</label>
+    </div>
+    <div class="col-sm-8">
+        @{
+            var source = !string.IsNullOrEmpty(Model.OrderFilePath) ? $"/files/Order/{Model.OrderFilePath}" : "";
+            var linkName = !string.IsNullOrEmpty(Model.OrderFilePath) ? Model.OrderFilePath : @Resources.Spans.NoFile;
+        }
+        <a target="_blank" href="@source">@linkName</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <label class="control-label"> @Html.DisplayNameFor(model => model.DescisionFilePath)</label>
+    </div>
+    <div class="col-sm-8">
+        @{
+            var source1 = !string.IsNullOrEmpty(Model.DescisionFilePath) ? $"/files/Order/{Model.DescisionFilePath}" : "";
+            var linkName1 = !string.IsNullOrEmpty(Model.DescisionFilePath) ? Model.DescisionFilePath : @Resources.Spans.NoFile;
+        }
+        <a target="_blank" href="@source1">@linkName1</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <label class="control-label">@Html.DisplayNameFor(model => model.Comission)</label>
+    </div>
+    <div class="col-sm-8 sportmenlist">
+        @Html.DisplayFor(model => model.Comission.Name):<br />
+        <ul>
+            @foreach (var member in ViewBag.ComissionMembers)
+            {
+            <li>
+                @{ var source2 = !string.IsNullOrEmpty(member.AvatarFilePath) ? $"/images/sportmen/{member.AvatarFilePath}" : "/images/noPhoto.jpg";}
+                <img src="@source2" />
+                @member.Surname @member.Name @member.LastName (@member.Region.Name)
+            </li>
+            }
+        </ul>
+    </div>
+</div>
+<div>
+    <h1 class="title">@Resources.Spans.AttestationResult</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>@Resources.Title.Sportsman</th>
+            <th>@Resources.Title.Belt</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in @ViewBag.AttestationUserBelts)
+            {
+                <tr>
+                    <td style="float: left;">
+                        @{ var source2 = !string.IsNullOrEmpty(item.Sportman.AvatarFilePath) ? $"/images/sportmen/{item.Sportman.AvatarFilePath}" : "/images/noPhoto.jpg";}
+                        <img style="width: 50px; margin-left: 15px;" src="@source2" />
+                        @item.Sportman.Surname @item.Sportman.Name @item.Sportman.LastName
+                    </td>
+                    <td>@item.Belt.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div><hr/>
+<div>
+@if (User.IsInRole("admin"))
+{
+    <a asp-action="Edit" asp-route-id="@Model.Id">@Resources.Actions.Edit</a>
+} |
+    <a asp-action="Index">@Resources.Spans.BackToList</a>
+</div>

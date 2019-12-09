@@ -1,0 +1,183 @@
+﻿@using msac_tpa_new.Entities
+@model Attestation
+
+@{
+    ViewData["Title"] = $"{@Resources.Actions.Edit} | {@Resources.Title.Attestation} | {@Model.Region.Name}";
+}
+
+<h1 class="title">@Resources.Title.Attestation - @Resources.Actions.Edit - <span style="color: blue;"><em>@Model.Region.Name</em></span></h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group row">
+                <label asp-for="RegionId" class="col-6 col-form-label"></label>
+                <div class="col-6">
+                    <select asp-for="RegionId" class="form-control" asp-items="@ViewBag.Regions"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="IssueDate" class="col-6 col-form-label"></label>
+                <div class="col-6">
+                    <input asp-for="IssueDate" class="form-control" />
+                    <span asp-validation-for="IssueDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Address" class="col-6 col-form-label"></label>
+                <div class="col-6">
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="OrderFilePath" class="col-6 col-form-label"></label>
+                <div class="col-6" style="display: inline-block !important">
+                    <input type="button" name="loadFile1" id="loadFile1" value="@Resources.Actions.UploadNewFile" onclick="document.getElementById('OrderFilePathNew').click();" />
+                    <label for="loadFile1" class="col-form-label">@Model.OrderFilePath</label>
+                    <input type="file" name="OrderFilePathNew" id="OrderFilePathNew" style="display: none;" />
+                </div>
+                <input type="hidden" asp-for="OrderFilePath" />
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="DescisionFilePath" class="col-6 col-form-label"></label>
+                <div class="col-6" style="display: inline">
+                    <input type="button" name="loadFile2" id="loadFile2" value="@Resources.Actions.UploadNewFile" onclick="document.getElementById('DescisionFilePathNew').click();" />
+                    <label for="loadFile2" class="col-form-label">@Model.DescisionFilePath</label>
+                    <input type="file" name="DescisionFilePathNew" id="DescisionFilePathNew" style="display: none;" /><br>
+                </div>
+                <input type="hidden" asp-for="DescisionFilePath" />
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ComissionId" class="col-6 col-form-label"></label>
+                <div class="col-6">
+                    <select asp-for="ComissionId" class="form-control" asp-items="@ViewBag.Comissions"></select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <input type="submit" value="@Resources.Actions.Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<h1 class="title">@Resources.Spans.AttestationResult</h1>
+<div id="attestationResult">
+</div>
+<hr />
+
+<button id="btnClick" type="button" class="btn btn-info">@Resources.Actions.AddUserAttestation</button><br /><br />
+<div>
+    <a asp-action="Index">@Resources.Spans.BackToList</a>
+</div>
+<div class="container">
+    <div class="modal fade" tabindex="-1" id="addUserAttestationModal" data-keyboard="false" data-backdrop="static">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">@Resources.Actions.AddUserAttestation</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <form id="AddSportmanAttestationForm">
+                        <fieldset id="SubmitForm">
+                            <input id="AttestationId" type="hidden" value="@Model.Id" />
+                            <div class="form-group">
+                                <label id="label_SportmanId" class="control-label">@Resources.Title.Sportsman</label>
+                                <select id="SportmanId" class="form-control" asp-items="@ViewBag.Sportmen"></select>
+                            </div>
+                            <div class="form-group">
+                                <label id="label_BeltId" class="control-label">@Resources.Title.Belt</label>
+                                <select id="BeltId" class="form-control" asp-items="@ViewBag.Belts"></select>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="btnSaveResult" class="btn btn-primary">@Resources.Actions.Add</button>
+                    <button type="button" id="btnHideModal" class="btn btn-danger">@Resources.Actions.Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript">
+    window.onload = loadPartials;
+    function loadPartials() {
+        $('#attestationResult').load('/Attestation/PartialViewSportsmanAttestation?attestationId=' + $("#AttestationId").val());
+    }
+
+    $(document).ready(function () {
+
+        $("#btnClick").click(function () {
+            $("#addUserAttestationModal").modal('show');
+        });
+        $("#btnHideModal").click(function () {
+            $('#attestationResult').load('/Attestation/PartialViewSportsmanAttestation?attestationId=' + $("#AttestationId").val());
+            $("#addUserAttestationModal").modal('hide');
+        });
+
+        $("#btnSaveResult").click(function () {
+            var data = {
+                'attestationId': ($("#AttestationId").val()),
+                'sportmanId': $('#SportmanId').val(),
+                'beltId': $('#BeltId').val()
+            };
+            console.log(JSON.stringify(data));
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                url: "/Attestation/AddSportmanAttestation/",
+                data: { attestationId: $("#AttestationId").val(), sportmanId: $('#SportmanId').val(), beltId: $('#BeltId').val() },
+                success: function (response) {
+                    console.log(JSON.stringify(response));
+                    $('#attestationResult').load('/Attestation/PartialViewSportsmanAttestation?attestationId=' + $("#AttestationId").val());
+                    if (response.success) {
+                        console.log("response true");
+                        $.toast({
+                            heading: 'Інформація',
+                            text: response.responseText,
+                            icon: 'success',
+                            loader: true, // Change it to false to disable loader
+                            loaderBg: '#9EC600', // To change the background
+                            position: 'top-center'
+                        });
+                    } else {
+                        $.toast({
+                            heading: 'Помилка',
+                            text: response.responseText,
+                            icon: 'error',
+                            loader: true, // Change it to false to disable loader
+                            loaderBg: '#9EC600', // To change the background
+                            position: 'top-center'
+                        });
+                        console.log("response false");
+                    }
+                },
+                error: function () {
+                    alert("Сталася помилка!");
+                }
+            });
+        });
+
+    });
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+@functions {
+string GetSportmanFullName(Sportman sportman)
+{
+    return $"{sportman.Surname} {sportman.Name} {sportman.LastName}";
+}
+}

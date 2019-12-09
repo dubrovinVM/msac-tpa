@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using msac_tpa.DAL.EF;
+using msac_tpa_new.EF;
 
 namespace msac_tpa_new.Migrations
 {
     [DbContext(typeof(SportmenContext))]
-    [Migration("20190915152920_key")]
-    partial class key
+    [Migration("20191120213111_Attest-auth-roles2")]
+    partial class Attestauthroles2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,49 +21,94 @@ namespace msac_tpa_new.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.Attestation", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.Attestation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Address")
+                        .IsRequired();
+
                     b.Property<int>("ComissionId");
 
-                    b.Property<string>("DecisionFilePath");
+                    b.Property<string>("DescisionFilePath");
 
                     b.Property<DateTime>("IssueDate");
 
                     b.Property<string>("OrderFilePath");
 
+                    b.Property<int>("RegionId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ComissionId");
 
+                    b.HasIndex("RegionId");
+
                     b.ToTable("Attestations");
                 });
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.AttestationUserBelt", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.AttestationUserBelt", b =>
                 {
                     b.Property<int>("AttestationId");
 
-                    b.Property<int>("SportManId");
+                    b.Property<int>("SportmanId");
 
                     b.Property<int>("BeltId");
 
-                    b.Property<int>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasKey("AttestationId", "SportManId");
+                    b.HasKey("AttestationId", "SportmanId", "BeltId");
 
                     b.HasAlternateKey("Id");
 
                     b.HasIndex("BeltId");
 
-                    b.HasIndex("SportManId");
+                    b.HasIndex("SportmanId");
 
                     b.ToTable("AttestationUserBelts");
                 });
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.Belt", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.Authentication.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("msac_tpa_new.Entities.Authentication.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Password");
+
+                    b.Property<int>("RegionId");
+
+                    b.Property<int?>("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RegionId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("msac_tpa_new.Entities.Belt", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,7 +121,7 @@ namespace msac_tpa_new.Migrations
                     b.ToTable("Belts");
                 });
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.Comission", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.Comission", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,7 +139,7 @@ namespace msac_tpa_new.Migrations
                     b.ToTable("Comissions");
                 });
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.Region", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.Region", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +152,7 @@ namespace msac_tpa_new.Migrations
                     b.ToTable("Regions");
                 });
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.Sportman", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.Sportman", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,43 +193,60 @@ namespace msac_tpa_new.Migrations
                     b.ToTable("SportmanComissions");
                 });
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.Attestation", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.Attestation", b =>
                 {
-                    b.HasOne("msac_tpa.DAL.Entities.Comission", "Comission")
+                    b.HasOne("msac_tpa_new.Entities.Comission", "Comission")
                         .WithMany("Attestations")
                         .HasForeignKey("ComissionId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("msac_tpa_new.Entities.Region", "Region")
+                        .WithMany("Attestations")
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.AttestationUserBelt", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.AttestationUserBelt", b =>
                 {
-                    b.HasOne("msac_tpa.DAL.Entities.Attestation", "Attestation")
+                    b.HasOne("msac_tpa_new.Entities.Attestation", "Attestation")
                         .WithMany("AttestationUserBelts")
                         .HasForeignKey("AttestationId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("msac_tpa.DAL.Entities.Belt", "Belt")
+                    b.HasOne("msac_tpa_new.Entities.Belt", "Belt")
                         .WithMany("AttestationUserBelts")
                         .HasForeignKey("BeltId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("msac_tpa.DAL.Entities.Sportman", "SportMan")
+                    b.HasOne("msac_tpa_new.Entities.Sportman", "Sportman")
                         .WithMany("AttestationUserBelts")
-                        .HasForeignKey("SportManId")
+                        .HasForeignKey("SportmanId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.Comission", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.Authentication.User", b =>
                 {
-                    b.HasOne("msac_tpa.DAL.Entities.Region", "Region")
+                    b.HasOne("msac_tpa_new.Entities.Region", "Region")
+                        .WithMany("Users")
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("msac_tpa_new.Entities.Authentication.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId");
+                });
+
+            modelBuilder.Entity("msac_tpa_new.Entities.Comission", b =>
+                {
+                    b.HasOne("msac_tpa_new.Entities.Region", "Region")
                         .WithMany("Comissions")
                         .HasForeignKey("RegionId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("msac_tpa.DAL.Entities.Sportman", b =>
+            modelBuilder.Entity("msac_tpa_new.Entities.Sportman", b =>
                 {
-                    b.HasOne("msac_tpa.DAL.Entities.Region", "Region")
+                    b.HasOne("msac_tpa_new.Entities.Region", "Region")
                         .WithMany("Sportmans")
                         .HasForeignKey("RegionId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -192,12 +254,12 @@ namespace msac_tpa_new.Migrations
 
             modelBuilder.Entity("msac_tpa_new.Entities.SportmanComission", b =>
                 {
-                    b.HasOne("msac_tpa.DAL.Entities.Comission", "Comission")
+                    b.HasOne("msac_tpa_new.Entities.Comission", "Comission")
                         .WithMany("SportmanComissions")
                         .HasForeignKey("ComissionId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("msac_tpa.DAL.Entities.Sportman", "Sportman")
+                    b.HasOne("msac_tpa_new.Entities.Sportman", "Sportman")
                         .WithMany("SportmanComissions")
                         .HasForeignKey("SportmanId")
                         .OnDelete(DeleteBehavior.Restrict);

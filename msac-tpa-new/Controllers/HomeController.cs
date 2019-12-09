@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using msac_tpa.DAL.EF;
+using msac_tpa_new.EF;
 using Microsoft.AspNetCore.Mvc;
 using msac_tpa_new.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace msac_tpa_new.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public HomeController()

@@ -1,0 +1,73 @@
+﻿@model msac_tpa_new.Entities.Attestation
+@{
+    ViewData["Title"] = @Resources.Actions.Delete;
+}
+<h1>@Resources.Spans.AreYouSureToDel</h1>
+<div>
+    <h4>@Resources.Title.Attestation <span style="color: blue">@Model.Region.Name</span></h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IssueDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IssueDate)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+    </dl>
+    <div class="row">
+        <div class="col-sm-4">
+            @Html.DisplayNameFor(model => model.Comission)
+        </div>
+        <div class="col-sm-8 sportmenlist">
+            @Html.DisplayFor(model => model.Comission.Name):<br />
+            <ul>
+                @foreach (var member in ViewBag.ComissionMembers)
+                {
+                    <li>
+                        @{ var source2 = !string.IsNullOrEmpty(member.AvatarFilePath) ? $"/images/sportmen/{member.AvatarFilePath}" : "/images/noPhoto.jpg";}
+                        <img src="@source2" />
+                        @member.Surname @member.Name @member.LastName (@member.Region.Name)
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h1 class="title">@Resources.Spans.AttestationResult</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>@Resources.Title.Sportsman</th>
+                <th>@Resources.Title.Belt</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in @ViewBag.AttestationUserBelts)
+            {
+                <tr>
+                    <td style="float: left;">
+                        @{ var source2 = !string.IsNullOrEmpty(item.Sportman.AvatarFilePath) ? $"/images/sportmen/{item.Sportman.AvatarFilePath}" : "/images/noPhoto.jpg";}
+                        <img style="width: 50px; margin-left: 15px;" src="@source2" />
+                        @item.Sportman.Surname @item.Sportman.Name @item.Sportman.LastName
+                    </td>
+                    <td>@item.Belt.Name</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div><hr/>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="@Resources.Actions.Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">@Resources.Spans.BackToList</a>
+    </form>
+</div>

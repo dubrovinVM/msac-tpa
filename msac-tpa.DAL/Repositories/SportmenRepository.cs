@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using msac_tpa.DAL.Interfaces;
+using msac_tpa_new.Interfaces;
 
-namespace msac_tpa.DAL.Repositories
+namespace msac_tpa_new.Repositories
 {
    //public class SportmenRepository : IRepository<Sportmen>
     //{

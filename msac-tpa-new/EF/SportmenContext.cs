@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using msac_tpa.DAL.Entities;
 using msac_tpa_new.Entities;
+using msac_tpa_new.Entities.Authentication;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace msac_tpa.DAL.EF
+namespace msac_tpa_new.EF
 {
     public class SportmenContext : DbContext
     {
@@ -15,6 +15,8 @@ namespace msac_tpa.DAL.EF
         public DbSet<Region> Regions { get; set; }
         public DbSet<AttestationUserBelt> AttestationUserBelts { get; set; }
         public DbSet<SportmanComission> SportmanComissions { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         public SportmenContext(DbContextOptions<SportmenContext> options) : base(options)
         {
@@ -28,24 +30,28 @@ namespace msac_tpa.DAL.EF
             //    relationship.DeleteBehavior = DeleteBehavior.Restrict;
             //}
 
+            builder.Entity<Attestation>()
+                .HasOne(p => p.Region)
+                .WithMany(p => p.Attestations)
+                .HasForeignKey(sc => sc.RegionId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             builder.ApplyConfiguration(new SportmanComissionConfiguration());
             builder.ApplyConfiguration(new AttestationUserBeltConfiguration());
 
-           
-
             builder.Entity<AttestationUserBelt>()
-                .HasKey(x => new { x.AttestationId, x.SportManId });
+                .HasKey(x => new { x.AttestationId, x.SportmanId, x.BeltId });
 
             builder.Entity<AttestationUserBelt>()
                 .HasOne(p => p.Attestation)
                 .WithMany(p => p.AttestationUserBelts)
                 .HasForeignKey(sc => sc.AttestationId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<AttestationUserBelt>()
-                .HasOne(p => p.SportMan)
+                .HasOne(p => p.Sportman)
                 .WithMany(p => p.AttestationUserBelts)
-                .HasForeignKey(sc => sc.SportManId)
+                .HasForeignKey(sc => sc.SportmanId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<AttestationUserBelt>()

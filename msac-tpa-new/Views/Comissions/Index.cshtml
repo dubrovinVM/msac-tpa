@@ -1,10 +1,10 @@
-﻿@model IEnumerable<msac_tpa.DAL.Entities.Comission>
+﻿@model IEnumerable<msac_tpa_new.Entities.Comission>
 
 @{
     ViewData["Title"] = @Resources.Title.Comission;
 }
 
-<h1>@Resources.Title.Comission</h1>
+<h1 class="title">@Resources.Title.Comission</h1>
 <hr />
 <form method="get">
     <div class="form-inline form-group">
@@ -16,7 +16,10 @@
     </div>
 </form>
 <p>
+@if (User.IsInRole("admin"))
+{
     <a asp-action="Create">@Resources.Actions.Create</a>
+}
 </p>
 <table class="table">
     <thead>
@@ -38,7 +41,7 @@
                 <ul>
                     @foreach (var member in item.SportmanComissions)
                     {
-                    <li>
+                    <li style="margin-bottom: 5px;">
                         @{ var source = !string.IsNullOrEmpty(member.Sportman.AvatarFilePath) ? $"/images/sportmen/{member.Sportman.AvatarFilePath}" : "/images/noPhoto.jpg";}
                         <img src="@source" style="height: 70px; width: 70px;" />
                         @member.Sportman.Surname @member.Sportman.Name @member.Sportman.LastName
@@ -48,11 +51,17 @@
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id">@Resources.Actions.Details</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">@Resources.Actions.Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">@Resources.Actions.Delete</a>
+                @if (User.IsInRole("admin"))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id">@Resources.Actions.Edit</a>
+                } |
+                @if (User.IsInRole("admin"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.Id"> @Resources.Actions.Delete </a>
+                }
             </td>
         </tr>
-    }
-    </tbody>
+                }
+</tbody>
 </table>
 

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using msac_tpa.DAL.EF;
-using msac_tpa.DAL.Entities;
+using msac_tpa_new.EF;
+using msac_tpa_new.Entities;
 
 namespace msac_tpa_new.EF
 {
@@ -35,7 +35,11 @@ namespace msac_tpa_new.EF
                     new Belt {Name = "Чорний пояс 4-й дан"},
                     new Belt {Name = "Чорний пояс 5-й дан"},
                     new Belt {Name = "Чорний пояс 6-й дан"},
-                    new Belt {Name = "Чорний пояс 7-й дан"});
+                    new Belt {Name = "Чорний пояс 7-й дан"},
+                    new Belt {Name = "Почесний Чорний пояс 1-й дан"},
+                    new Belt {Name = "Почесний Чорний пояс 2-й дан" },
+                    new Belt {Name = "Почесний Чорний пояс 3-й дан" }
+                    );
                 context.SaveChanges();
 
             }

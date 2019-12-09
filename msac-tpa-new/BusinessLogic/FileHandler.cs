@@ -51,5 +51,52 @@ namespace msac_tpa_new.BusinessLogic
                 return;
             }
         }
+
+        public static async Task<string> SaveDocumentAsync(IFormFile file, FileTypes fileType, string issueDate, int regionId)
+        {
+            try
+            {
+                if (file != null && file.Length != 0)
+                {
+                    var extenstion = Path.GetExtension(file.FileName);
+                    var fileNewName = string.Format($"{regionId}_{issueDate.Substring(0,10).Replace("-","").Replace(":","").Replace("\\", "").Replace("/", "")}_{fileType.ToString()}{extenstion}");
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", $"{fileType.ToString()}", fileNewName);
+                    if (File.Exists(path))
+                    {
+                        path = string.Concat(Guid.NewGuid().ToString("N").Substring(0,10), path);
+                    }
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    return fileNewName;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public static void RemoveDoc(string fileName, FileTypes fileType)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files", $"{fileType.ToString()}", fileName);
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+        }
     }
 }

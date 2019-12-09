@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using msac_tpa.DAL.EF;
-using msac_tpa.DAL.Entities;
+using msac_tpa_new.EF;
+using msac_tpa_new.Entities;
 using msac_tpa_new.EF;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -46,6 +46,7 @@ namespace msac_tpa_new
 
         private static void InitData(SportmenContext context)
         {
+            InitRoles.Initialize(context);
             InitBeltData.Initialize(context);
             InitRegionsData.Initialize(context);
             InitSportmenData.Initialize(context);

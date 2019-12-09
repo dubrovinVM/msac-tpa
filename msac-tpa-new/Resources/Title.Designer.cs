@@ -88,6 +88,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Атестація.
+        /// </summary>
+        public static string Attestation {
+            get {
+                return ResourceManager.GetString("Attestation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Атестації.
+        /// </summary>
+        public static string Attestations {
+            get {
+                return ResourceManager.GetString("Attestations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пояс.
+        /// </summary>
+        public static string Belt {
+            get {
+                return ResourceManager.GetString("Belt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Міста.
         /// </summary>
         public static string Cities {

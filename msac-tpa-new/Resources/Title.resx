@@ -231,4 +231,13 @@
   <data name="AddComission" xml:space="preserve">
     <value>Створити комісію</value>
   </data>
+  <data name="Attestation" xml:space="preserve">
+    <value>Атестація</value>
+  </data>
+  <data name="Attestations" xml:space="preserve">
+    <value>Атестації</value>
+  </data>
+  <data name="Belt" xml:space="preserve">
+    <value>Пояс</value>
+  </data>
 </root>

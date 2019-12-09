@@ -123,10 +123,55 @@
   <data name="AreYouSureToDel" xml:space="preserve">
     <value>Ви впевнені, що хочете видалити?</value>
   </data>
+  <data name="AttestationResult" xml:space="preserve">
+    <value>Результат атестації</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Назад до списку</value>
   </data>
   <data name="ChooseValue" xml:space="preserve">
     <value>Оберіть значення</value>
+  </data>
+  <data name="DateFrom" xml:space="preserve">
+    <value>Дата з:</value>
+  </data>
+  <data name="DateTo" xml:space="preserve">
+    <value>Дата по:</value>
+  </data>
+  <data name="DeletedSuccess" xml:space="preserve">
+    <value>Видалено успішно!</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Введіть емейл</value>
+  </data>
+  <data name="EnterPassword" xml:space="preserve">
+    <value>Введіть пароль</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Сталася помилка!</value>
+  </data>
+  <data name="NewPassport" xml:space="preserve">
+    <value>Новий пароль</value>
+  </data>
+  <data name="NoExists" xml:space="preserve">
+    <value>Значення не існує в базі!</value>
+  </data>
+  <data name="NoFile" xml:space="preserve">
+    <value>Файл не завантажений</value>
+  </data>
+  <data name="NotAllParams" xml:space="preserve">
+    <value>Вибрано не всі параметри!</value>
+  </data>
+  <data name="PageSize" xml:space="preserve">
+    <value>Кількість записів на сторінці</value>
+  </data>
+  <data name="ReenterPassword" xml:space="preserve">
+    <value>Повторіть пароль</value>
+  </data>
+  <data name="ResultExists" xml:space="preserve">
+    <value>Такий результат уже існує! Повторно не може бути занесений!</value>
+  </data>
+  <data name="SportmanAddedSuccess" xml:space="preserve">
+    <value>Спортсмен доданий успішно!</value>
   </data>
 </root>

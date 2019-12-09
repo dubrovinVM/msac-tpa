@@ -1,0 +1,48 @@
+﻿@model msac_tpa_new.ViewModels.RegisterModel
+@{
+    ViewData["Title"] = @Resources.Actions.Create;
+}
+
+<h1 class="title">@Resources.Actions.Register</h1>
+<div class="row">
+    <div class="col-md-4 ">
+        <form asp-action="Register" asp-controller="Account" asp-anti-forgery="true">
+            <div class="validation" asp-validation-summary="ModelOnly" />
+            <div>
+                <div>
+                    <label asp-for="Email">@Resources.Actions.EnterEmail</label><br />
+                    <input class="form-control" type="text" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"/>
+                </div><br/>
+                <div class="form-group">
+                    <label asp-for="RegionId" class="control-label"></label>
+                    <select asp-for="RegionId" class="form-control" asp-items="@ViewBag.Regions">
+                        <option selected="selected" class="form-control" value="">-- @Resources.Spans.ChooseValue--</option>
+                    </select>
+                </div><br />
+                <div class="form-group">
+                    <label asp-for="RoleId" class="control-label"></label>
+                    <select asp-for="RoleId" class="form-control" asp-items="@ViewBag.Roles">
+                        <option selected="selected" class="form-control" value="">-- @Resources.Spans.ChooseValue--</option>
+                    </select>
+                </div><br />
+                <div>
+                    <label asp-for="Password">@Resources.Actions.EnterPassword</label><br />
+                    <input class="form-control" asp-for="Password" />
+                    <span asp-validation-for="Password" class="text-danger" />
+                </div><br />
+                <div>
+                    <label asp-for="ConfirmPassword">@Resources.Actions.ReenterPassword</label><br />
+                    <input class="form-control" asp-for="ConfirmPassword" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"/>
+                </div><br />
+                <div>
+                    <input type="submit" value="@Resources.Actions.Create" class="btn btn-primary"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

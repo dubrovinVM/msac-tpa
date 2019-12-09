@@ -1,10 +1,10 @@
-﻿@model msac_tpa.DAL.Entities.Sportman
+﻿@model msac_tpa_new.Entities.Sportman
 
 @{
     ViewData["Title"] = @Resources.Title.Details;
 }
 
-<h1>@Resources.Title.Details</h1>
+<h1 class="title">@Resources.Title.Details</h1>
 
 <div style="margin-top: 20px;">
     <h4>@Resources.Title.Sportsman </h4>
@@ -15,39 +15,52 @@
     </div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Surname)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Surname)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BirthDay)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BirthDay)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Region)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Region.Name)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">@Resources.Actions.Edit</a> |
+    <h3>@Resources.Title.Attestations:</h3>
+    <div>
+        <ul>
+            @foreach (var attestation in @ViewBag.Attestations)
+            {
+                <li><a href="~/Attestation/Details/@attestation?.Attestation?.Id">@attestation?.Attestation?.IssueDate.ToString().Substring(0,10)</a> - @attestation?.Belt?.Name</li>
+            }
+        </ul>
+    </div>
+    @if (User.IsInRole("admin") || User.IsInRole("header"))
+
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id">@Resources.Actions.Edit</a>
+    } |
     <a asp-action="Index">@Resources.Spans.BackToList</a>
 </div>

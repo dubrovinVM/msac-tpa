@@ -1,80 +1,137 @@
-﻿@model IEnumerable<msac_tpa.DAL.Entities.Sportman>
+﻿@using msac_tpa_new.Entities
+@using msac_tpa_new.ViewModels
+@model msac_tpa_new.ViewModels.SportmenViewModel
 
 @{
     ViewData["Title"] = @Resources.Title.Sportsmen;
 }
+@addTagHelper "*, PagerApp"
 
-<h1>@Resources.Title.Sportsmen</h1>
+<h1 class="title">@Resources.Title.Sportsmen</h1>
 <hr />
 <form method="get">
     <div class="form-inline form-group">
         <label class="control-label right_20">@Resources.Models.Surname: </label>
-         @Html.TextBox("surname", "", new { @class = "form-control right_20" })
+        @Html.TextBox("surname", "", new { @class = "form-control right_20" })
         <label class="control-label right_20">@Resources.Models.Region: </label>
         @Html.DropDownList("region", @ViewBag.Regions as SelectList, new { @class = "form-control right_20" })
         <input type="submit" value="@Resources.Actions.Filter" class="btn btn-primary" />
+        <label style="margin-left: 100px;" class="control-label">@Resources.Spans.PageSize: </label>
+        @Html.DropDownList("PageSize", @ViewBag.PageSizes as SelectList, new { @class = "form-control", @style = "margin-left: 10px;margin-right: 10px;" })
+        <input type="submit" value="@Resources.Actions.Refresh" class="btn btn-primary" />
     </div>
 </form>
 <hr />
 <p>
-    <a asp-action="Create" >@Resources.Actions.AddSportsman</a>
+    @if (User.IsInRole("admin") || User.IsInRole("header"))
+    {
+        <a asp-action="Create">@Resources.Actions.AddSportsman</a>
+    }
 </p>
 <table class="table top_40">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AvatarFilePath)
+                @Html.DisplayNameFor(model => Model.Sportmen.FirstOrDefault().AvatarFilePath)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Surname)
+                @Html.DisplayNameFor(model => Model.Sportmen.FirstOrDefault().Surname)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => Model.Sportmen.FirstOrDefault().Name)
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.BirthDay)
+                @Html.DisplayNameFor(model => Model.Sportmen.FirstOrDefault().LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Region)
+                @Html.DisplayNameFor(model => Model.Sportmen.FirstOrDefault().AttestationUserBelts.FirstOrDefault().Belt.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => Model.Sportmen.FirstOrDefault().BirthDay)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => Model.Sportmen.FirstOrDefault().Region)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @{ var source = !string.IsNullOrEmpty(@item.AvatarFilePath) ? $"/images/sportmen/{item.AvatarFilePath}" : "/images/noPhoto.jpg";}
-            <img src="@source" style="height: 40px;width: 40px" />
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Surname)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
+        @foreach (var item in Model.Sportmen)
+        {
+            <tr>
+                <td>
+                    @{ var source = !string.IsNullOrEmpty(@item.AvatarFilePath) ? $"/images/sportmen/{item.AvatarFilePath}" : "/images/noPhoto.jpg";}
+                    <img src="@source" style="height: 40px;width: 40px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
 
-        <td>
-            @Html.DisplayFor(modelItem => item.BirthDay)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Region.Name)
-        </td>
-        <td>
-            <a asp-action="Details" asp-route-id="@item.Id">@Resources.Actions.Details</a> |
-            <a asp-action="Edit" asp-route-id="@item.Id">@Resources.Actions.Edit</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">@Resources.Actions.Delete</a>
-        </td>
-    </tr>
-}
-    </tbody>
-</table>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @{
+                        var belt = item.AttestationUserBelts.OrderByDescending(a => a.Id).FirstOrDefault()?.Belt?.Name;
+                        var cssStyle = GetColorStyleForBelt(@belt);
+                    }
+                    <label style="@cssStyle">@belt</label>
+                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Region.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">@Resources.Actions.Details</a> |
+                        @if (User.IsInRole("admin") || User.IsInRole("header"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">@Resources.Actions.Edit</a>
+                        } |
+                        @if (User.IsInRole("admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id">@Resources.Actions.Delete</a>
+                        }
+                    </td>
+                </tr>
+                    }
+                </tbody>
+            </table>
+            <page-link page-model="Model.PageViewModel" page-action="Index"></page-link>
+            @functions
+            {
+                public string GetColorStyleForBelt(string belt)
+                {
+                    switch (belt)
+                    {
+                        case "Жовтий пояс":
+                        case "Жовтий пояс 1-го ступеню":
+                            return "color:yellow";
+                            break;
+                        case "Синій пояс":
+                        case "Синій пояс 1-го ступеню":
+                            return "color:blue";
+                            break;
+                        case "Оранжевий пояс":
+                        case "Оранжевий пояс 1-го ступеню":
+                            return "color:orange";
+                            break;
+                        case "Зелений пояс":
+                        case "Зелений пояс 1-го ступеню ":
+                            return "color:green";
+                            break;
+                        case "Коричневий пояс":
+                        case "Коричневий пояс 1-го ступеню ":
+                            return "color:brown";
+                            break;
+                    }
+                    return "font-weight:bold;";
+                }
+            }
+

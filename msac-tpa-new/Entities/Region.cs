@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using msac_tpa_new.Entities.Authentication;
 
-namespace msac_tpa.DAL.Entities
+namespace msac_tpa_new.Entities
 {
     public class Region
     {
@@ -13,11 +14,15 @@ namespace msac_tpa.DAL.Entities
 
         public IList<Comission> Comissions { get; set; }
         public IList<Sportman> Sportmans { get; set; }
+        public IList<Attestation> Attestations { get; set; }
+        public IList<User> Users { get; set; }
 
         public Region()
         {
             Comissions = new List<Comission>();
             Sportmans = new List<Sportman>();
+            Users = new List<User>();
+            Attestations = new List<Attestation>();
         }
     }
 }

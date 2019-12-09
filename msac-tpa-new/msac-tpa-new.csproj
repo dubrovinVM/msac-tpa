@@ -10,7 +10,10 @@
 
 
   <ItemGroup>
+    <PackageReference Include="jQuery.jqGrid" Version="4.4.4" />
+    <PackageReference Include="jQuery.UI" Version="1.12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
@@ -27,6 +30,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Actions.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Error.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Error.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Models.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -52,6 +60,11 @@
       <LastGenOutput>Actions.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Error.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Models.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Models.Designer.cs</LastGenOutput>
@@ -72,9 +85,10 @@
 
 
   <ItemGroup>
+    <Folder Include="wwwroot\files\Descision\" />
+    <Folder Include="wwwroot\files\Order\" />
     <Folder Include="wwwroot\images\coaches\" />
     <Folder Include="wwwroot\images\sportmen\" />
-    <Folder Include="wwwroot\files\" />
   </ItemGroup>
 
 </Project>

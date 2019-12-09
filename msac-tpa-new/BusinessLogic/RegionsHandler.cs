@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using msac_tpa.DAL.EF;
-using msac_tpa.DAL.Entities;
+using msac_tpa_new.EF;
+using msac_tpa_new.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,6 +29,12 @@ namespace msac_tpa_new.BusinessLogic
         {
             List<Region> regions = _context.Regions.AsNoTracking().ToList();
             return new SelectList(regions, "Id", "Name", regionId);
+        }
+
+        public SelectList GetSelectedListRegions()
+        {
+            List<Region> regions = _context.Regions.AsNoTracking().ToList();
+            return new SelectList(regions, "Id", "Name");
         }
     }
 }

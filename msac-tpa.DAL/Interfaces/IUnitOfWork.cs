@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace msac_tpa.DAL.Interfaces
+namespace msac_tpa_new.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {

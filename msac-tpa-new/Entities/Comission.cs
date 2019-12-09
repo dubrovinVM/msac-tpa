@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using msac_tpa_new.Entities;
 
-namespace msac_tpa.DAL.Entities
+namespace msac_tpa_new.Entities
 {
     public class Comission
     {

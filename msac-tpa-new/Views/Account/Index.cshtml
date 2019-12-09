@@ -1,0 +1,61 @@
+﻿@model IEnumerable<msac_tpa_new.Entities.Authentication.User>
+
+@{
+    ViewData["Title"] = @Resources.Title.Users;
+}
+<h1 class="title">@Resources.Title.Users</h1>
+<hr />
+<form method="get">
+    <div class="form-inline form-group">
+        <label class="control-label right_20">@Resources.Models.Login: </label>
+        @Html.TextBox("surname", "", new { @class = "form-control right_20" })
+        <label class="control-label right_20">@Resources.Models.Region: </label>
+        @Html.DropDownList("region", @ViewBag.Regions as SelectList, new { @class = "form-control right_20" })
+        <input type="submit" value="@Resources.Actions.Filter" class="btn btn-primary" />
+    </div>
+</form>
+<hr />
+<p>
+    <a asp-action="Register">@Resources.Actions.Register</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegionId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @item.Role.Description
+            </td>
+            <td>
+                @item.Region.Name
+            </td>
+            <td>
+                @Html.ActionLink(@Resources.Actions.Edit, "Edit", new {  id=item.Id  }) |
+                @Html.ActionLink(@Resources.Actions.Delete, "Delete", new {  id=item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

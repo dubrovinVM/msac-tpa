@@ -5,22 +5,22 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using msac_tpa.DAL.EF;
-using msac_tpa.DAL.Entities;
+using msac_tpa_new.EF;
+using msac_tpa_new.Entities;
 using msac_tpa_new.BusinessLogic;
 using msac_tpa_new.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 namespace msac_tpa_new.Controllers
 {
+    [Authorize]
     public class ComissionsController : Controller
     {
         private readonly SportmenContext _context;
         protected readonly ILogger _logger;
         private readonly SelectList _regionsList;
         private readonly RegionsHandler _regionsHandler;
-
-
 
         public ComissionsController(SportmenContext context, ILogger<ComissionsController> logger)
         {
@@ -72,17 +72,18 @@ namespace msac_tpa_new.Controllers
         }
 
         // GET: Comissions/Create
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             ViewBag.Regions = new SelectList(_context.Regions, "Id", "Name");
             ViewBag.Sportmen = _context.SportMans
                 .Select(r => new SelectListItem {Value = r.Id.ToString(), Text = r.Fullname}).ToList();
-            _logger.LogInformation("Comissions Created.");
             return View();
         }
 
         // POST: Comissions/Create
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string[] sportman, [Bind("Id, Name, RegionId")] Comission comission)
         {
@@ -100,6 +101,7 @@ namespace msac_tpa_new.Controllers
                 }
                 _context.Add(comission);
                 await _context.SaveChangesAsync();
+                _logger.LogInformation("Comissions Created.");
                 return RedirectToAction(nameof(Index));
             }
             ViewBag.Regions = _regionsHandler.GetSelectedListRegionsWithSelection(comission.RegionId);
@@ -107,6 +109,7 @@ namespace msac_tpa_new.Controllers
         }
 
         // GET: Comissions/Edit/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -130,10 +133,8 @@ namespace msac_tpa_new.Controllers
             return View(comission);
         }
 
-        // POST: Comissions/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string[] sportman, int id, [Bind("Id,Name,RegionId")] Comission comission)
         {
@@ -190,7 +191,7 @@ namespace msac_tpa_new.Controllers
             return View(comission);
         }
         
-        // GET: Comissions/Delete/5
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -205,8 +206,8 @@ namespace msac_tpa_new.Controllers
             return View(comission);
         }
 
-        // POST: Comissions/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
