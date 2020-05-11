@@ -30769,3 +30769,145 @@ Request finished in 21.393ms 404
 Request starting HTTP/1.1 GET https://localhost:5001/favicon.ico  
 Sending file. Request path: '/favicon.ico'. Physical path: 'D:\VSProjects\msac-tpa-new\msac-tpa-new\wwwroot\favicon.ico'
 Request finished in 12.9258ms 200 image/x-icon
+Request starting HTTP/1.1 GET https://localhost:5001/  
+Route matched with {action = "Index", controller = "Sportmen"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller msac_tpa_new.Controllers.SportmenController (msac-tpa-new).
+Authorization was successful.
+Entity Framework Core 2.2.6-servicing-10079 initialized 'SportmenContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: SensitiveDataLoggingEnabled 
+Executed DbCommand (25ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE') SELECT 1 ELSE SELECT 0
+Executing action method msac_tpa_new.Controllers.SportmenController.Index (msac-tpa-new) - Validation state: Valid
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Name]
+FROM [Regions] AS [r]
+Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [b].[AttestationId], [b].[SportmanId], [b].[BeltId], [b].[Id], [b.Belt].[Id], [b.Belt].[Name]
+FROM [AttestationUserBelts] AS [b]
+INNER JOIN [Belts] AS [b.Belt] ON [b].[BeltId] = [b.Belt].[Id]
+The Include operation for navigation '[s].Region' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information.
+The Include operation for navigation '[s].AttestationUserBelts' is unnecessary and was ignored because the navigation is not reachable in the final query results. See https://go.microsoft.com/fwlink/?linkid=850303 for more information.
+Executed DbCommand (43ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [SportMans] AS [s]
+Executed DbCommand (96ms) [Parameters=[@__p_0='0', @__p_1='5'], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AvatarFilePath], [s].[BirthDay], [s].[LastName], [s].[Name], [s].[RegionId], [s].[Surname], [s.Region].[Id], [s.Region].[Name]
+FROM [SportMans] AS [s]
+INNER JOIN [Regions] AS [s.Region] ON [s].[RegionId] = [s.Region].[Id]
+ORDER BY [s].[Surname], [s].[Id]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+Executed DbCommand (5ms) [Parameters=[@__p_0='0', @__p_1='5'], CommandType='Text', CommandTimeout='30']
+SELECT [s.AttestationUserBelts].[AttestationId], [s.AttestationUserBelts].[SportmanId], [s.AttestationUserBelts].[BeltId], [s.AttestationUserBelts].[Id]
+FROM [AttestationUserBelts] AS [s.AttestationUserBelts]
+INNER JOIN (
+    SELECT DISTINCT [t].*
+    FROM (
+        SELECT [s0].[Id], [s0].[Surname]
+        FROM [SportMans] AS [s0]
+        INNER JOIN [Regions] AS [s.Region0] ON [s0].[RegionId] = [s.Region0].[Id]
+        ORDER BY [s0].[Surname], [s0].[Id]
+        OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+    ) AS [t]
+) AS [t0] ON [s.AttestationUserBelts].[SportmanId] = [t0].[Id]
+ORDER BY [t0].[Surname], [t0].[Id]
+Executed action method msac_tpa_new.Controllers.SportmenController.Index (msac-tpa-new), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1609.2007ms.
+Executing ViewResult, running view Index.
+Executed ViewResult - view Index executed in 427.749ms.
+Executed action msac_tpa_new.Controllers.SportmenController.Index (msac-tpa-new) in 2261.9193ms
+Request finished in 2817.8094ms 200 text/html; charset=utf-8
+Request starting HTTP/1.1 GET https://localhost:5001/images/sportmen/Buryan.jpg  
+Request starting HTTP/1.1 GET https://localhost:5001/css/site.css  
+Request finished in 21.6665ms 404 
+The file /css/site.css was not modified
+Request starting HTTP/1.1 GET https://localhost:5001/images/sportmen/Gerasimenko.png  
+The file /images/sportmen/Gerasimenko.png was not modified
+Request finished in 48.7633ms 304 text/css
+Request finished in 15.4884ms 304 image/png
+Request starting HTTP/1.1 GET https://localhost:5001/?page=2  
+Route matched with {action = "Index", controller = "Sportmen"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller msac_tpa_new.Controllers.SportmenController (msac-tpa-new).
+Authorization was successful.
+Entity Framework Core 2.2.6-servicing-10079 initialized 'SportmenContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: SensitiveDataLoggingEnabled 
+Executed DbCommand (24ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE') SELECT 1 ELSE SELECT 0
+Executing action method msac_tpa_new.Controllers.SportmenController.Index (msac-tpa-new) - Validation state: Valid
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Name]
+FROM [Regions] AS [r]
+Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [b].[AttestationId], [b].[SportmanId], [b].[BeltId], [b].[Id], [b.Belt].[Id], [b.Belt].[Name]
+FROM [AttestationUserBelts] AS [b]
+INNER JOIN [Belts] AS [b.Belt] ON [b].[BeltId] = [b.Belt].[Id]
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [SportMans] AS [s]
+Executed DbCommand (4ms) [Parameters=[@__p_0='5'], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AvatarFilePath], [s].[BirthDay], [s].[LastName], [s].[Name], [s].[RegionId], [s].[Surname], [s.Region].[Id], [s.Region].[Name]
+FROM [SportMans] AS [s]
+INNER JOIN [Regions] AS [s.Region] ON [s].[RegionId] = [s.Region].[Id]
+ORDER BY [s].[Surname], [s].[Id]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY
+Executed DbCommand (6ms) [Parameters=[@__p_0='5'], CommandType='Text', CommandTimeout='30']
+SELECT [s.AttestationUserBelts].[AttestationId], [s.AttestationUserBelts].[SportmanId], [s.AttestationUserBelts].[BeltId], [s.AttestationUserBelts].[Id]
+FROM [AttestationUserBelts] AS [s.AttestationUserBelts]
+INNER JOIN (
+    SELECT DISTINCT [t].*
+    FROM (
+        SELECT [s0].[Id], [s0].[Surname]
+        FROM [SportMans] AS [s0]
+        INNER JOIN [Regions] AS [s.Region0] ON [s0].[RegionId] = [s.Region0].[Id]
+        ORDER BY [s0].[Surname], [s0].[Id]
+        OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY
+    ) AS [t]
+) AS [t0] ON [s.AttestationUserBelts].[SportmanId] = [t0].[Id]
+ORDER BY [t0].[Surname], [t0].[Id]
+Executed action method msac_tpa_new.Controllers.SportmenController.Index (msac-tpa-new), returned result Microsoft.AspNetCore.Mvc.ViewResult in 91.3589ms.
+Executing ViewResult, running view Index.
+Executed ViewResult - view Index executed in 18.4896ms.
+Executed action msac_tpa_new.Controllers.SportmenController.Index (msac-tpa-new) in 181.4489ms
+Request finished in 206.8693ms 200 text/html; charset=utf-8
+Request starting HTTP/1.1 GET https://localhost:5001/images/sportmen/Ponomarenko.jpg  
+Request starting HTTP/1.1 GET https://localhost:5001/images/sportmen/Savelev.jpeg  
+Request finished in 14.1125ms 404 
+Request finished in 17.3629ms 404 
+Request starting HTTP/1.1 GET https://localhost:5001/?page=1  
+Route matched with {action = "Index", controller = "Sportmen"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.Nullable`1[System.Int32], System.String, Int32, Int32) on controller msac_tpa_new.Controllers.SportmenController (msac-tpa-new).
+Authorization was successful.
+Entity Framework Core 2.2.6-servicing-10079 initialized 'SportmenContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer' with options: SensitiveDataLoggingEnabled 
+Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE') SELECT 1 ELSE SELECT 0
+Executing action method msac_tpa_new.Controllers.SportmenController.Index (msac-tpa-new) - Validation state: Valid
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [r].[Id], [r].[Name]
+FROM [Regions] AS [r]
+Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [b].[AttestationId], [b].[SportmanId], [b].[BeltId], [b].[Id], [b.Belt].[Id], [b.Belt].[Name]
+FROM [AttestationUserBelts] AS [b]
+INNER JOIN [Belts] AS [b.Belt] ON [b].[BeltId] = [b.Belt].[Id]
+Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [SportMans] AS [s]
+Executed DbCommand (5ms) [Parameters=[@__p_0='0', @__p_1='5'], CommandType='Text', CommandTimeout='30']
+SELECT [s].[Id], [s].[AvatarFilePath], [s].[BirthDay], [s].[LastName], [s].[Name], [s].[RegionId], [s].[Surname], [s.Region].[Id], [s.Region].[Name]
+FROM [SportMans] AS [s]
+INNER JOIN [Regions] AS [s.Region] ON [s].[RegionId] = [s.Region].[Id]
+ORDER BY [s].[Surname], [s].[Id]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+Executed DbCommand (8ms) [Parameters=[@__p_0='0', @__p_1='5'], CommandType='Text', CommandTimeout='30']
+SELECT [s.AttestationUserBelts].[AttestationId], [s.AttestationUserBelts].[SportmanId], [s.AttestationUserBelts].[BeltId], [s.AttestationUserBelts].[Id]
+FROM [AttestationUserBelts] AS [s.AttestationUserBelts]
+INNER JOIN (
+    SELECT DISTINCT [t].*
+    FROM (
+        SELECT [s0].[Id], [s0].[Surname]
+        FROM [SportMans] AS [s0]
+        INNER JOIN [Regions] AS [s.Region0] ON [s0].[RegionId] = [s.Region0].[Id]
+        ORDER BY [s0].[Surname], [s0].[Id]
+        OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+    ) AS [t]
+) AS [t0] ON [s.AttestationUserBelts].[SportmanId] = [t0].[Id]
+ORDER BY [t0].[Surname], [t0].[Id]
+Executed action method msac_tpa_new.Controllers.SportmenController.Index (msac-tpa-new), returned result Microsoft.AspNetCore.Mvc.ViewResult in 40.5418ms.
+Executing ViewResult, running view Index.
+Executed ViewResult - view Index executed in 20.3807ms.
+Executed action msac_tpa_new.Controllers.SportmenController.Index (msac-tpa-new) in 92.7108ms
+Request finished in 108.6435ms 200 text/html; charset=utf-8
+Request starting HTTP/1.1 GET https://localhost:5001/images/sportmen/Buryan.jpg  
+Request finished in 18.7418ms 404 
